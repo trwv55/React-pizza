@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import qs from 'qs';
 
 import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
@@ -80,15 +80,9 @@ const Home = () => {
   const skeleton = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
   const pizzas = items.map((obj) => (
-    <PizzaBlock
-      key={obj.id}
-      id={obj.id}
-      title={obj.title}
-      price={obj.price}
-      image={obj.imageUrl}
-      sizes={obj.sizes}
-      types={obj.types}
-    />
+    <Link key={obj.id} to={`/pizza/${obj.id}`}>
+      <PizzaBlock {...obj} />
+    </Link>
   ));
 
   return (

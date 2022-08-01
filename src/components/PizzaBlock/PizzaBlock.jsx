@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addProduct } from '../../redux/slices/cartSlice';
 
-function PizzaBlock({ id, price, title, image, sizes, types }) {
+function PizzaBlock({ id, price, title, imageUrl, sizes, types }) {
   const dispatch = useDispatch();
   const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
   const addedCount = cartItem ? cartItem.count : 0;
@@ -17,18 +17,17 @@ function PizzaBlock({ id, price, title, image, sizes, types }) {
       id,
       title,
       price,
-      image,
+      imageUrl,
       type: typesName[activeType],
       size: sizes[activeSize],
     };
-    console.log('item', item);
     dispatch(addProduct(item));
   };
 
   return (
     <div className='pizza-block__wrapper'>
       <div className='pizza-block'>
-        <img className='pizza-block__image' src={image} alt='Pizza' />
+        <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
         <h4 className='pizza-block__title'>{title}</h4>
         <div className='pizza-block__selector'>
           <ul>
