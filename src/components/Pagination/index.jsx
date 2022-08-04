@@ -7,13 +7,13 @@ const Pagination = ({ changeCurrentPage, currentPage }) => {
   return (
     <ReactPaginate
       className={styles.root}
-      breakLabel="..."
-      nextLabel=" >"
+      breakLabel='...'
+      nextLabel=' >'
       onPageChange={(e) => changeCurrentPage(e.selected + 1)}
       pageRangeDisplayed={4}
       pageCount={3}
       forcePage={currentPage}
-      previousLabel="< "
+      previousLabel='< '
       renderOnZeroPageCount={null}
     />
   );
