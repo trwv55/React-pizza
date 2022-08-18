@@ -1,6 +1,7 @@
 import React from 'react';
+import clsx from 'clsx'; 
 import { useDispatch } from 'react-redux';
-import { addProduct, minusItem, removeItem } from '../../redux/slices/cartSlice';
+import { addProduct, CartItem, minusItem, removeItem } from '../../redux/slices/cartSlice';
 
 type CartItemProps = {
   id: string;
@@ -12,14 +13,14 @@ type CartItemProps = {
   image: string;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ id, title, type, price, size, count, image }) => {
+const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, price, size, count, image }) => {
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
     dispatch(
       addProduct({
         id,
-      }),
+      } as CartItem),
     );
   };
 
@@ -43,9 +44,10 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, type, price, size, count
         </p>
       </div>
       <div className='cart__item-count'>
-        <div
+        <button
+          disabled={count === 1}
           onClick={onClickMinus}
-          className='button button--outline button--circle cart__item-count-minus'>
+          className={clsx('button button--outline button--circle cart__item-count-minus')}>
           <svg
             width='10'
             height='10'
@@ -61,9 +63,9 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, type, price, size, count
               fill='#EB5A1E'
             />
           </svg>
-        </div>
+        </button>
         <b>{count}</b>
-        <div
+        <button
           onClick={onClickPlus}
           className='button button--outline button--circle cart__item-count-plus'>
           <svg
@@ -81,7 +83,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, type, price, size, count
               fill='#EB5A1E'
             />
           </svg>
-        </div>
+        </button>
       </div>
       <div className='cart__item-price'>
         <b>{price * count} ₽</b>
@@ -109,4 +111,4 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, type, price, size, count
   );
 };
 
-export default CartItem;
+export default CartItemBlock;
