@@ -7,6 +7,10 @@ type ListItem = {
   sort: string;
 }
 
+type PopUpClick = MouseEvent & {
+  path: Node[];
+}
+
 export const list: ListItem[] = [
   { name: 'популярности (DESC)', sort: 'rating' },
   { name: 'популярности (ASC)', sort: '-rating' },
@@ -29,8 +33,10 @@ function Sort() {
   }
 
   useEffect(() => {
-    const handleClickBody = (event: any) => {
-      if (!event.path.includes(sortRef.current)) {
+    const handleClickBody = (event: MouseEvent) => {
+      const _event = event as PopUpClick;
+
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setIsVisible(false);
       }
     };
