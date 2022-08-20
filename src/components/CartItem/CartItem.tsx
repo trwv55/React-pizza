@@ -47,7 +47,7 @@ const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, price, size, 
         <button
           disabled={count === 1}
           onClick={onClickMinus}
-          className={clsx('button button--outline button--circle cart__item-count-minus')}>
+          className={clsx('button button--outline button--circle cart__item-count-minus', {'cart__item-count-minus--disabled' : count === 1})}>
           <svg
             width='10'
             height='10'
