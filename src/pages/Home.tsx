@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import qs from 'qs';
 
-import { setCategoryId, setFilters, selectFilter } from '../redux/slices/filterSlice';
+
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock/PizzaBlock';
@@ -11,8 +10,12 @@ import { Skeleton } from '../components/PizzaBlock/Skeleton';
 // import Pagination from '../components/Pagination';
 import { SearchContext } from '../App';
 import { list } from '../components/Sort';
-import { fetchPizzas, SearchPizzaParams, selectPizzas } from '../redux/slices/pizzaSlice';
+
 import { useAppDispatch } from '../redux/store';
+import { selectPizzas } from '../redux/slices/pizza/selectors';
+import { selectFilter } from '../redux/slices/filter/selectors';
+import { setCategoryId } from '../redux/slices/filter/slice';
+import { fetchPizzas } from '../redux/slices/pizza/asyncActions';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
